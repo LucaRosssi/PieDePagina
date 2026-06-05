@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 import CartWidget from './CartWidget';
+import NavbarCart from './NavbarCart';
 
 function CollapsibleExample() {
   return (
@@ -21,20 +22,14 @@ function CollapsibleExample() {
             <Nav.Link as={Link} to="/productos">
               Productos
             </Nav.Link>
-            {/* <NavDropdown title="Categorías" id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Más Vendidos</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Clásicos de Siempre
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown> */}
-            <Nav.Link eventKey={2} as={Link} to={'/carrito'}>
-              <CartWidget />
-            </Nav.Link>
+            <NavDropdown title={<CartWidget />} align="end" className="no-caret">
+              <div style={{right:'60px', }}>
+              {<NavbarCart/>}
+              </div>
+            </NavDropdown>
+            {/* <Nav.Link eventKey={2} as={Link} to={'/carrito'}>
+              
+            </Nav.Link> */}
           </Nav>
         </Navbar.Collapse>
       </Container>

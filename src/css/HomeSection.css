@@ -11,3 +11,8 @@
 .card-container > * {
     flex-shrink: 0;  /*Evita que las tarjetas se reduzcan de tamaño*/
 }
+
+.no-caret::after,
+.no-caret .dropdown-toggle::after {
+    display: none !important;
+}

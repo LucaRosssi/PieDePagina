@@ -7,7 +7,7 @@ import emptyCart from '../assets/empty-cart.json'
 const EmptyCart = () => {
     return(
         <div style={{display: 'flex', flexDirection: 'column', alignItems:'center', justifyContent:'center'}}> 
-            <h1>Tu carrito esta vacio!</h1>
+            <h1>Tu carrito esta vacío!</h1>
             <Player
                 autoplay
                 loop
