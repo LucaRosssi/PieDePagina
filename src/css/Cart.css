@@ -1,0 +1,26 @@
+h1 {
+    justify-self: center;
+    margin: 20px;
+    padding: 10px;
+}
+
+.cartContainer {
+    margin: 10px;
+    min-height: 400px;
+    background-color: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.total {
+    margin: 10px;
+    font-size: 1.2em;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    padding: 0 2rem;
+}
