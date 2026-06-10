@@ -1,11 +1,11 @@
-import React from 'react'
 import "../css/HomeSection.css"
 import CardsHome from './CardsHome';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useProducts } from './CustomHooks';
 import LoaderComponent from './LoaderComponent';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../service/firebase';
+import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 
 function HomeSection({ categoria }) {
     const [section, setSection] = useState([]);
@@ -15,13 +15,16 @@ function HomeSection({ categoria }) {
         setLoader(true);
         const getProducts = async () => { //Función para obtener los productos de la sección correspondiente, usa async/await para manejar la promesa de getDocs
             try {
-                let field = "";
-
-                if (categoria === "mas_vendidos") {
-                    field = "masVendidos";
-                }else if (categoria === "clasico") {
-                    field = "clasico";
+                const fields = {
+                    mas_vendidos: "masVendidos",
+                    clasico: "clasico"
+                };
+                const field = fields[categoria];
+                
+                if (!field) {
+                    throw new Error(`Categoría no válida: ${categoria}`);
                 }
+
                 const q = query(
                     collection(db, "items"),
                     where(field, "==", true)
@@ -44,16 +47,43 @@ function HomeSection({ categoria }) {
         getProducts();
     }, [categoria]);
 
+    const containerRef = useRef(null);
+
+    const scrollLeft = () => {
+        containerRef.current?.scrollBy({
+            left: -500,
+            behavior: "smooth",
+        });
+    };
+
+    const scrollRight = () => {
+        containerRef.current?.scrollBy({
+            left: 500,
+            behavior: "smooth",
+        });
+    };
+
     return (    
-        loader
-        ? <LoaderComponent/>
-        :
-        <div className='home-section'>
-            <div className='last-releases'>
-                <div className='card-container'>
-                    <CardsHome products={section} />
-                </div>
+        <div className="home-section">
+            <ChevronLeft
+                size={30}
+                onClick={scrollLeft}
+            />
+
+            <div
+                className="card-container"
+                ref={containerRef}
+            >
+                {loader
+                    ? <LoaderComponent />
+                    : <CardsHome products={section} />
+                }
             </div>
+
+            <ChevronRight
+                size={30}
+                onClick={scrollRight}
+            />
         </div>
     )
 }

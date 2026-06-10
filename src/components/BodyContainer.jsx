@@ -1,35 +1,35 @@
-import React from "react";
 import HomeSection from "./HomeSection";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../css/BodyContainer.css"
-import { useProducts } from "./CustomHooks";
-import LoaderComponent from "./LoaderComponent";
 
 function BodyContainer() {
-    const {products, loader} = useProducts();
-
+    const sections = [
+        {
+            title: "Los más vendidos",
+            category: "mas_vendidos"
+        },
+        {
+            title: "Clásicos de siempre",
+            category: "clasico"
+        }
+    ];
     return (
-        loader
-        ? <LoaderComponent/>
-        :
         <div className="body-container">
-            <div className="title-container">
-                <h1>Bienvenido a Pie de Página!</h1>
-                <p>El lugar en donde encontrarás lo mejor de la literatural universal.</p>
+            <div className="title-container hero">
+                <h1 className="hero-title">Bienvenido a Pie de Página!</h1>
+                <p className="hero-subtitle">El lugar en donde encontrarás lo mejor de la literatura universal</p>
+                <div className="see-all-container">
+                    <Button className="hero-button" as={Link} to='/productos'>Ver Catálogo</Button>
+                </div>
             </div>
             <div className="sections-container">
-                <div className="section">
-                    <h2>Los más vendidos</h2>
-                    <HomeSection categoria="mas_vendidos" />
-                </div>
-                <div className="section">
-                    <h2>Clásicos de siempre</h2>
-                    <HomeSection categoria="clasico" />
-                </div>
-                <div style={{ display: "flex", justifyContent: "center", marginBottom: "40px" }}>
-                    <Button as={Link} to='/productos'>Ver todo</Button>
-                </div>
+                {sections.map((section, index) => (
+                    <div className="section" key={index}>
+                        <h2>{section.title}</h2>
+                        <HomeSection categoria={section.category} />
+                    </div>
+                ))}
             </div>
         </div>
     )
