@@ -1,28 +1,28 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 
 function CardsHome({products}) {
   return (
     <>
-    {products.map((productos, index) => (
-      <Card key={index} style={{ width: '13em', marginBottom: '1em' }}>
-        <Card.Img variant="top" src={productos.img} alt={productos.nombre} />
+    {products.map((product) => (
+      <Card key={product.id} style={{ width: '13em', marginBottom: '1em' }} className="card-home">
+        <Card.Img variant="top" src={product.img} alt={product.nombre} loading="lazy" />
         <Card.Body className="d-flex flex-column">
-          <Card.Title>{productos.nombre}</Card.Title>
+          <Card.Title>{product.nombre}</Card.Title>
 
           <Card.Text >
-            {productos.autor}
+            {product.autor}
           </Card.Text>
 
-          <div className="mt-auto">
+          <div className="mt-auto price">
             <Card.Text>
-              ${productos.precio}
+              ${product.precio} 
+              {/* .toLocaleString("es-AR") //Rompe PRODUCTS*/} 
             </Card.Text>
 
             <div className="d-flex">
-              <Button as={Link} to={`/item/${productos.id}`} variant="primary">
+              <Button as={Link} to={`/item/${product.id}`} variant="primary">
                 Comprar
               </Button>
             </div>

@@ -28,3 +28,20 @@
 .no-caret .dropdown-toggle::after {
     display: none !important;
 }
+
+.chevron {
+    border: none;
+}
+
+.price{
+    font-weight:bold;
+}
+
+.card-home{
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.card-home:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0,0,0,.15);
+}
