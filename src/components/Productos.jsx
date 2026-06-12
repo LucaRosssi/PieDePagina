@@ -1,14 +1,16 @@
 import '../css/Productos.css'
 import { useProducts } from './CustomHooks'
-import { useState, useEffect, use } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import CardsHome from './CardsHome';
 import ButtonList from './ButtonList';
-import LoaderComponent from './LoaderComponent';
+import Skeleton from './Skeleton';
 
 const Productos = () => {
-  const {products, loader} = useProducts();
+  const {products, loader, error} = useProducts();
 
-  const allCategories = ['Todos', ...new Set(products.map(product => product.categoria))];
+  const allCategories = useMemo(() => 
+    ['Todos', ...new Set(products.map(product => product.categoria))], [products]
+  ); //Recalcula solo cuando 'products' cambia, evitando cálculos innecesarios en cada renderizado.
 
   const [filteredProducts, setFilteredProducts] = useState([allCategories[0]]);
   const [searchText, setSearchText] = useState('');
@@ -36,9 +38,10 @@ const Productos = () => {
     setFilteredProducts(sortedProducts);
   };
 
-  const handleSearch = (event) => {
-    const clean = (str) => str.toLowerCase().replace(/\./g, '').replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  const clean = (str) => str.toLowerCase().replace(/\./g, '').replace(/\s+/g, '').normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+
+  const handleSearch = (event) => {
     event.preventDefault();
     if (searchText.trim() === '') {
       setFilteredProducts(products);
@@ -50,10 +53,11 @@ const Productos = () => {
     }
   };
 
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
-        loader
-        ? <LoaderComponent/>
-        :
     <div>
         <div className='form-container'>
             <h1>Productos</h1>
@@ -61,12 +65,21 @@ const Productos = () => {
               <input type="text" placeholder='Buscar un producto' value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
             </form>
             <div className='btn-container'>
-                <ButtonList  categorias={allCategories} filterCategory={filterCategory} sortProducts={sortProducts} />
+                <ButtonList  categorias={allCategories} filterCategory={filterCategory} sortProducts={sortProducts}/>
             </div>
         </div>
         <div>
             <div className='products-container' style={{ display: 'flex', flexWrap: 'wrap', gap: '3em', justifyContent: 'center' }}>
-                <CardsHome products={filteredProducts} />
+                {
+                loader ? (
+                    Array.from({ length: 20 }, (_, index) => (
+                        <Skeleton key={index} />
+                    ))
+                ) : error ? (
+                    <p>{error}</p>
+                ) : (
+                    <CardsHome products={filteredProducts}/>
+                )}
             </div>
         </div>
     </div>

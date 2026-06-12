@@ -5,6 +5,7 @@ import LoaderComponent from './LoaderComponent';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../service/firebase';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
+import Skeleton from './Skeleton';
 
 function HomeSection({ categoria }) {
     const [section, setSection] = useState([]);
@@ -110,7 +111,9 @@ function HomeSection({ categoria }) {
                 onScroll={checkScrollPosition}
             >
                 {loader ? (
-                    <LoaderComponent />
+                    Array.from({ length: 8 }, (_, index) => (
+                        <Skeleton key={index} />
+                    ))
                 ) : error ? (
                     <p>{error}</p>
                 ) : (

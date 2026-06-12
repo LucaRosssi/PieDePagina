@@ -1,21 +1,26 @@
-import React from 'react'
+import { memo } from 'react'
 
-const ButtonList = ({ categorias, filterCategory, sortProducts }) => {
+const sortOptions = [
+  { label: 'A/Z', value: 'A/Z' },
+  { label: 'Z/A', value: 'Z/A' }
+];
+
+const ButtonList = memo(({ categorias, filterCategory, sortProducts }) => {
   return (
-    <div className='btn-container'>
+    <>
       {categorias.map((categoria) => (
         <button key={categoria} onClick={() => filterCategory(categoria)} type='button'>
           {categoria}
         </button>
       ))}
-      <button type='button' onClick={() => sortProducts('A/Z')}>
-        A/Z
-      </button>
-      <button type='button' onClick={() => sortProducts('Z/A')}>
-        Z/A
-      </button>
-    </div>
+      {sortOptions.map((option) => (
+        <button key={option.value} onClick={() => sortProducts(option.value)} type='button'>
+          {option.label}
+        </button>
+      ))}
+    </>
   )
-}
+});
 
+ButtonList.displayName = 'ButtonList';
 export default ButtonList

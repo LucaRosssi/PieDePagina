@@ -1,13 +1,17 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import ProductImage from './SkeletonImage'
 
 function CardsHome({products}) {
   return (
     <>
     {products.map((product) => (
       <Card key={product.id} style={{ width: '13em', marginBottom: '1em' }} className="card-home">
-        <Card.Img variant="top" src={product.img} alt={product.nombre} loading="lazy" />
+        <ProductImage
+            src={product.img}
+            alt={product.nombre}
+        />
         <Card.Body className="d-flex flex-column">
           <Card.Title>{product.nombre}</Card.Title>
 
