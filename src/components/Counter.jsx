@@ -30,7 +30,7 @@ const Counter = ({ detail, onAdd }) => {
                     <button className='btn btn-danger' onClick={restar} disabled={count === 0}>
                     -
                     </button>
-                <span className='btn text-dark'>{count}</span>
+                <span className='btn text-dark counter-value'>{count}</span>
                 <button className='btn btn-success' onClick={sumar} disabled={count === stock}>
                     +
                 </button>

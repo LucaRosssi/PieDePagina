@@ -3,7 +3,7 @@
     margin: 50px auto;
     flex-direction: column;
     padding: 20px;
-    width: 90vw;
+    width: 80vw;
     border: 1px solid #ccc;
     border-radius: 20px;
 }
@@ -27,7 +27,6 @@
     padding: 20px;
     justify-content: center;
     align-items: center;
-    background-color: #e7e5e5;
 }
 
 .item-info img {
@@ -39,6 +38,10 @@
 .item-detail {
     display: flex;
     width: 60%;
+}
+
+.title {
+    width: 100%;
 }
 
 .title h2 {
@@ -70,6 +73,8 @@
 .priceTotal {
     font-size: .5em;
     color: #747373;
+    display: inline-block;
+    width: 8rem;
 }
 
 p {
@@ -83,4 +88,10 @@ p {
     font-size: 1.2em;
     cursor: pointer;
     width: 35vw;
+}
+
+.counter-value {
+    display: inline-block;
+    width: 3rem;
+    text-align: center;
 }

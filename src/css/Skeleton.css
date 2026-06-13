@@ -16,6 +16,11 @@
     border-radius: 5px;
 }
 
+.skeleton-item-image {
+    height: 456px;
+    width: 300px;
+}
+
 .image-wrapper {
     position: relative;
     width: 100%;
@@ -44,10 +49,25 @@
     margin-bottom: 1rem;
 }
 
+.title .skeleton-text {
+    height: 3rem;
+    margin: 1.5rem 0;
+}
+
 .skeleton-author {
     width: 80%;
     height: 1rem;
     margin-bottom: 2rem;
+}
+
+.title .skeleton-author {
+    width: 40%;
+    height: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.title .skeleton-author:last-child {
+    margin-bottom: 90px;
 }
 
 .skeleton-price {
@@ -56,10 +76,31 @@
     margin-bottom: .5rem;
 }
 
+.skeleton-h2 {
+    width: 15%;
+    height: 2rem;
+    margin-bottom: 1rem;
+}
+
+.skeleton-p {
+    width: 100%;
+    height: 1rem;
+    margin-bottom: 0.7rem;
+}
+
+.skeleton-p:last-child {
+    width: 60%;
+}
+
 .skeleton-button {
     width: 100%;
     height: 38px;
     border: none !important;
+}
+
+.skeleton-counter {
+    width: 100%;
+    height: 200px;
 }
 
 @keyframes shimmer {

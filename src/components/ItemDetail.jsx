@@ -34,9 +34,10 @@ export function ItemDetail({ detail }) {
             });
     }
 
+    const outOfStock = detail.stock === 0;
+
     return (
         <div className='item-detail-container'>
-            <h1>Detalle del producto</h1>
             <div className='item-info'>
                 <div className='item-image-container'>
                     <img src={detail.img} alt={detail.nombre} />
@@ -49,14 +50,13 @@ export function ItemDetail({ detail }) {
                             <p className='price'>${detail.precio?.toLocaleString('es-CO')}</p>
                         </div>
                         <div>
-                            <Counter detail={detail} onAdd={onAdd} /> 
-{/* // onAdd es una prop que se pasa de un componente padre a uno hijo, para manejar la adicion de items a una lista o estado en el componente padre. En este caso, se utiliza para agregar un producto al carrito de compras cuando se hace clic en el botón de agregar. */}
+                            {outOfStock ? <span style={{width:'60vh', backgroundColor:'#ccc', display:'inline-block', height:'3rem', padding:'10px', textAlign:'center', borderRadius:'10px', marginTop:'140px'}}>Sin Stock</span> : <Counter detail={detail} onAdd={onAdd} /> }
                         </div>
                         {purchase ? confirmPurchase() : <></>}
                     </div>
                 </div>
             </div>
-            <p>Descripción</p>
+            <h2>Sinópsis</h2>
             <p>{detail.descripcion}</p>
         </div>
     )

@@ -1,13 +1,14 @@
 import { useParams } from "react-router-dom";
 import { ItemDetail } from "./ItemDetail";
 import { useState, useEffect } from 'react';
-import LoaderComponent from "./LoaderComponent";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../service/firebase";
+import SkeletonItemDetail from "./SkeletonItemDetail";
 
 function ItemDetailContainer() {
     const [detail, setDetail] = useState({});
     const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(null);
 
     const { id } = useParams();
     
@@ -16,20 +17,26 @@ function ItemDetailContainer() {
         const productRef = doc(db, 'items', id);
         getDoc(productRef) 
             .then((res)=> {
+                 if (!res.exists()) {
+                    setDetail(null);
+                    return;
+                }
+
                 setDetail({
-                    id:res.id,
+                    id: res.id,
                     ...res.data()
-                })
+                });
             })
-            .catch((error)=> console.log(error))
+            .catch((error) => {
+                console.error(error);
+                setError(error);
+            })
             .finally(()=> setLoader(false))
     }, [id]);
-    
-    //Hacer un componente en caso de que se acceda a un ID que no existe. 
 
     return (
         loader
-        ? <LoaderComponent text="detalle"/>
+        ? <SkeletonItemDetail detail={detail}/>
         :
         <div>
             <ItemDetail detail={detail} />
