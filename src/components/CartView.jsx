@@ -31,18 +31,20 @@ export const CartView = () => {
     }
 
     return (
-        <div>
-            <h1>Su carrito</h1>
-            <div className="cartContainer">
+        <>
+        <h1>Su carrito</h1>
+        <div className="cartContainer">
+            <div className="cartItem">
                 {
                     cart.map((compra)=> <CartItem key={compra.id} compra={compra} />)
                 }
             </div>
             <span className="total">Total a pagar: $ {totalPrice()}</span>
             <div className='button-container'>
-                <Button as={Link} to='/checkout' >Comprar</Button>
-                <Button onClick={confirmClearCart}>Vaciar Carrito</Button>
+                <Button as={Link} to='/checkout' className="btn" >Comprar</Button>
+                <Button onClick={confirmClearCart} className="btn btn-danger">Vaciar Carrito</Button>
             </div>
         </div>
+        </>
     )
 }

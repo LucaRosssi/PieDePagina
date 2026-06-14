@@ -6,6 +6,8 @@ import { Button } from "react-bootstrap"
 import { Link } from "react-router-dom"
 import {useForm} from "react-hook-form"
 import EmptyCart from "./EmptyCart"
+import succesfullPurchase from "../assets/succesfull-purchase.json"
+import { Player } from '@lottiefiles/react-lottie-player'
 
 
 
@@ -44,11 +46,19 @@ const CheckoutRHF = () => {
 
     return (
         orderId
-        ? <div>
+        ? <>
             <h1>Gracias por tu compra</h1>
-            <p>El ID de tu compra es {orderId}</p>
-            <Button as={Link} to='/'>Volver al inicio</Button>
-        </div>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: '50vh', textAlign: 'center'}}>
+                <Player
+                    autoplay
+                    loop
+                    src={succesfullPurchase}
+                    style={{ width: 250, height: 250 }}
+                />
+                <p style={{marginBottom:'40px'}}>El ID de tu compra es {orderId}</p>
+                <Button as={Link} to='/'>Volver al inicio</Button>
+            </div>
+          </>
         :
         <div>
             <h1>Complete sus datos</h1>

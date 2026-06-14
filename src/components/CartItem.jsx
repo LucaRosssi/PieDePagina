@@ -11,7 +11,7 @@ const CartItem = ({compra}) => {
             <span style={{width:'477px', alignItems:'center'}}>{compra.nombre} | {compra.autor}</span>
             <span>{compra.quantity}</span>
             <span style={{paddingRight:'5em'}}>$ {compra.precio}</span>
-            <button className="btn btn-danger" onClick={() => removeOneItem(compra.id)}>X</button>
+            <button className="btn btn-danger" onClick={() => removeOneItem(compra.id)} style={{marginRight:'20px'}}>X</button>
         </div>
     )
 }
