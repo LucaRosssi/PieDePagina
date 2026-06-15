@@ -10,6 +10,7 @@ export const useProducts = () => {
     useEffect(() => {
       let isMounted = true;
       setLoader(true)
+      setError(null);
         const prodCollection = collection(db, "items") //Indica con que coleccion vamos a trabajar
         getDocs(prodCollection)
         .then((res)=>{

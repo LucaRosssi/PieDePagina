@@ -31,6 +31,8 @@
 
 .chevron {
     border: none;
+    background-color: transparent;
+    width: 30px;
 }
 
 .price{
@@ -44,4 +46,9 @@
 .card-home:hover {
     transform: translateY(-4px);
     box-shadow: 0 6px 16px rgba(0,0,0,.15);
+}
+
+button:disabled {
+    opacity: 0.8;
+    cursor: default;
 }

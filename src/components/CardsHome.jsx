@@ -21,8 +21,7 @@ function CardsHome({products}) {
 
           <div className="mt-auto price">
             <Card.Text>
-              ${product.precio} 
-              {/* .toLocaleString("es-AR") //Rompe PRODUCTS*/} 
+              ${product.precio.toLocaleString("es-AR")} 
             </Card.Text>
 
             <div className="d-flex">

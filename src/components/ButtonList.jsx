@@ -9,12 +9,12 @@ const ButtonList = memo(({ categorias, filterCategory, sortProducts }) => {
   return (
     <>
       {categorias.map((categoria) => (
-        <button key={categoria} onClick={() => filterCategory(categoria)} type='button'>
+        <button key={categoria} onClick={() => filterCategory(categoria)} type='button' className='active-btn'>
           {categoria}
         </button>
       ))}
       {sortOptions.map((option) => (
-        <button key={option.value} onClick={() => sortProducts(option.value)} type='button'>
+        <button key={option.value} onClick={() => sortProducts(option.value)} type='button' className='active-btn'>
           {option.label}
         </button>
       ))}
@@ -22,5 +22,5 @@ const ButtonList = memo(({ categorias, filterCategory, sortProducts }) => {
   )
 });
 
-ButtonList.displayName = 'ButtonList';
+ButtonList.displayName = 'ButtonList'; 
 export default ButtonList

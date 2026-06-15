@@ -94,7 +94,6 @@ function HomeSection({ categoria }) {
 
     return (    
         <div className="home-section">
-            {canScrollLeft && (
                 <button
                     onClick={scrollLeft}
                     aria-label="Productos anteriores"
@@ -103,7 +102,6 @@ function HomeSection({ categoria }) {
                 >
                     <ChevronLeft size={30} />
                 </button>
-            )}
 
             <div
                 className="card-container"
@@ -115,15 +113,18 @@ function HomeSection({ categoria }) {
                         <Skeleton key={index} />
                     ))
                 ) : error ? (
-                    <p>{error}</p>
+                    <div className="error-container">
+                        <p>No pudimos cargar los productos.</p>
+                        <button onClick={() => window.location.reload()}>
+                            Reintentar
+                        </button>
+                    </div>
                 ) : (
                     section.length === 0
                         ? <p>No hay productos disponibles.</p>
                         : <CardsHome products={section}/>
                 )}
             </div>
-
-            {canScrollRight && (
                 <button
                     onClick={scrollRight}
                     aria-label="Productos siguientes"
@@ -132,7 +133,6 @@ function HomeSection({ categoria }) {
                 >
                     <ChevronRight size={30} />
                 </button>
-            )}
         </div>
     )
 }

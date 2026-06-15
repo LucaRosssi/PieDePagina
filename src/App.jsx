@@ -7,6 +7,7 @@ import { CartProvider } from './context/CartContext'
 import { CartContainer } from './components/CartContainer' 
 import CheckoutRHF from './components/CheckoutRHF'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PageNotFound from './components/PageNotFound'
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
         <Route path="/productos" element={<Productos/>}/>
         <Route path='/carrito' element={<CartContainer/>}/>
         <Route path='/checkout' element={<CheckoutRHF/>}/>
+
+        <Route path='*' element={<PageNotFound/>}/>
       </Routes>
     </CartProvider>
     </BrowserRouter>

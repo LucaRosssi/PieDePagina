@@ -4,6 +4,8 @@ import { useState, useEffect, useMemo } from 'react';
 import CardsHome from './CardsHome';
 import ButtonList from './ButtonList';
 import Skeleton from './Skeleton';
+import {Categories} from '../constants/categories.js'
+import ProductNotFound from './ProductNotFound.jsx';
 
 const Productos = () => {
   const {products, loader, error} = useProducts();
@@ -12,7 +14,7 @@ const Productos = () => {
     ['Todos', ...new Set(products.map(product => product.categoria))], [products]
   ); //Recalcula solo cuando 'products' cambia, evitando cálculos innecesarios en cada renderizado.
 
-  const [filteredProducts, setFilteredProducts] = useState([allCategories[0]]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchText, setSearchText] = useState('');
 
   useEffect(() => {
@@ -54,7 +56,12 @@ const Productos = () => {
   };
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="error-container">
+              <p>No pudimos cargar los productos.</p>
+              <button onClick={() => window.location.reload()}>
+                  Reintentar
+              </button>
+          </div>;
   }
 
   return (
@@ -65,7 +72,7 @@ const Productos = () => {
               <input type="text" placeholder='Buscar un producto' value={searchText} onChange={(e) => setSearchText(e.target.value)}/>
             </form>
             <div className='btn-container'>
-                <ButtonList  categorias={allCategories} filterCategory={filterCategory} sortProducts={sortProducts}/>
+                <ButtonList  categorias={Categories} filterCategory={filterCategory} sortProducts={sortProducts}/>
             </div>
         </div>
         <div>
@@ -76,10 +83,20 @@ const Productos = () => {
                         <Skeleton key={index} />
                     ))
                 ) : error ? (
-                    <p>{error}</p>
+                    <div className="error-container">
+                        <p>No pudimos cargar los productos.</p>
+                        <button onClick={() => window.location.reload()}>
+                            Reintentar
+                        </button>
+                    </div>
                 ) : (
-                    <CardsHome products={filteredProducts}/>
-                )}
+                      searchText.trim() !== "" && filteredProducts.length === 0 ? (
+                        <ProductNotFound /> 
+                      ) : (
+                        <CardsHome products={filteredProducts}/>
+                      )
+                    )
+                  }
             </div>
         </div>
     </div>

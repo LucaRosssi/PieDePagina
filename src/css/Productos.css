@@ -47,3 +47,7 @@
   color: white;
   margin: 5px 10px;
 }
+
+.active-btn:focus {
+  box-shadow: 0 0 15px rgba(0, 123, 255, 0.5) !important;
+}
