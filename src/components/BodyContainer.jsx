@@ -2,8 +2,11 @@ import HomeSection from "./HomeSection";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import "../css/BodyContainer.css"
+import { useProducts } from "./CustomHooks";
 
 function BodyContainer() {
+    const { products, loader, error } = useProducts();
+
     const sections = [
         {
             title: "Los más vendidos",
@@ -27,7 +30,11 @@ function BodyContainer() {
                 {sections.map((section, index) => (
                     <div className="section" key={index}>
                         <h2>{section.title}</h2>
-                        <HomeSection categoria={section.category} />
+                        <HomeSection products={products}
+                            categoria={section.category}
+                            loader={loader}
+                            error={error} 
+                        />
                     </div>
                 ))}
             </div>

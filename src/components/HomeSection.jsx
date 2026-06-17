@@ -1,56 +1,23 @@
 import "../css/HomeSection.css"
 import CardsHome from './CardsHome';
-import { useState, useEffect, useRef } from 'react';
-import LoaderComponent from './LoaderComponent';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../service/firebase';
 import { ChevronLeft, ChevronRight } from 'react-bootstrap-icons';
 import Skeleton from './Skeleton';
 
-function HomeSection({ categoria }) {
-    const [section, setSection] = useState([]);
-    const [loader, setLoader] = useState(false);
-    const [error, setError] = useState(null);
-    
+function HomeSection({ products, categoria, loader, error }) {
+
     const categoryFields = {
         mas_vendidos: "masVendidos",
         clasico: "clasico"
     };
 
-    useEffect(() => {
-        setLoader(true);
-        setError(null);
+    const filteredProducts = useMemo(() => {
+        const field = categoryFields[categoria];
 
-        const getProducts = async () => { //Función para obtener los productos de la sección correspondiente, usa async/await para manejar la promesa de getDocs
-            try {
-                const field = categoryFields[categoria];
-
-                if (!field) {
-                    throw new Error(`Categoría no válida: ${categoria}`);
-                }
-
-                const q = query(
-                    collection(db, "items"),
-                    where(field, "==", true)
-                );
-
-                const snapshot = await getDocs(q);
-                const products = snapshot.docs.map((doc) => ({
-                    id: doc.id,
-                    ...doc.data(),
-                }));
-                setSection(products);
-            }
-            catch (error) {
-                    console.error("Error fetching products:", error);
-                    setError("Error al cargar productos.");
-            }
-            finally {                
-                setLoader(false);
-            }
-        };
-        getProducts();
-    }, [categoria]);
+        return products.filter(product => product[field]);
+    }, [products, categoria]);
 
     // Funciones para manejar el scroll horizontal de la sección de productos, usando useRef para referenciar el contenedor y scrollBy para desplazarlo suavemente. El scrollAmount se calcula como el 80% del ancho del contenedor para mostrar una cantidad significativa de productos al desplazarse.
     const containerRef = useRef(null);
@@ -72,7 +39,7 @@ function HomeSection({ categoria }) {
 
     useEffect(() => {
         checkScrollPosition();
-    }, [section]);
+    }, [filteredProducts]);
 
     const scrollAmount = containerRef.current?.offsetWidth * 0.8;
 
@@ -120,9 +87,9 @@ function HomeSection({ categoria }) {
                         </button>
                     </div>
                 ) : (
-                    section.length === 0
+                    filteredProducts.length === 0
                         ? <p>No hay productos disponibles.</p>
-                        : <CardsHome products={section}/>
+                        : <CardsHome products={filteredProducts}/>
                 )}
             </div>
                 <button
