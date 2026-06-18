@@ -27,3 +27,4 @@ Si desea ver el proyecto online, puede ingresar al siguiente link: [Pie de Pagin
 - [Sweet Alert 2](https://sweetalert2.github.io/)
 
 Desarrolado por Luca Ezequiel Rossi
+**Linkedin** [Linkedin](https://www.linkedin.com/in/luca-rossi-ab90a2199/)
