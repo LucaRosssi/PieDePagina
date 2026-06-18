@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../service/firebase";
 import SkeletonItemDetail from "./SkeletonItemDetail";
+import { Navigate } from "react-router-dom";
 
 function ItemDetailContainer() {
     const [detail, setDetail] = useState({});
@@ -33,6 +34,10 @@ function ItemDetailContainer() {
             })
             .finally(()=> setLoader(false))
     }, [id]);
+
+    if (detail === null) {
+        return <Navigate to="/404-product" />;
+    }
 
     return (
         loader

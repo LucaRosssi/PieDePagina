@@ -19,8 +19,6 @@ const CheckoutRHF = () => {
 
     const terminarCompra = (data)=> {
             const {name, lastname, addres, mail, secondmail} = data
-            console.log(data)
-            console.log(cart)
             setLoader(true)
             let orden = {
                 comprador: {name, lastname, addres, mail, secondmail},
@@ -72,7 +70,9 @@ const CheckoutRHF = () => {
                 {errors?.mail?.type === "required" && <p style={{color:'red', fontSize: '1em'}}>El correo es requerido</p>}
                 <input className='form-control' name='mail' type='email' placeholder='Ingresa tu correo' {...register('mail', { required: true })} />
                 {errors?.secondmail?.type === "required" && <p style={{color:'red', fontSize: '1em'}}>Debes repetir tu correo</p>}
-                <input className='form-control' name='secondmail' type='email' placeholder='Repeti tu correo' {...register('secondmail', { required: true, validate:{ isEqual: (value) => getValues('mail') === value || 'Los correos no coinciden' } })} />
+                <input className='form-control' name='secondmail' type='email' placeholder='Repeti tu correo' {...register('secondmail', 
+                    { required: true, validate:{ isEqual: (value) => getValues('mail') === value || 'Los correos no coinciden' } })} 
+                />
                 {errors?.secondmail?.type === "isEqual" && <p style={{color:'red', fontSize: '1em'}}>Los correos no coinciden</p>}
                 <button type="submit" className='btn btn-success' disabled={loader}>{loader ? 'Cargando Compra' : 'Terminar Compra'}</button>
             </form>

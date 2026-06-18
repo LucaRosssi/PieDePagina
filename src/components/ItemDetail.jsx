@@ -50,7 +50,8 @@ export function ItemDetail({ detail }) {
                             <p className='price'>${detail.precio?.toLocaleString('es-CO')}</p>
                         </div>
                         <div>
-                            {outOfStock ? <span style={{width:'60vh', backgroundColor:'#ccc', display:'inline-block', height:'3rem', padding:'10px', textAlign:'center', borderRadius:'10px', marginTop:'140px'}}>Sin Stock</span> : <Counter detail={detail} onAdd={onAdd} /> }
+                            {outOfStock ? <span style={{width:'60vh', backgroundColor:'#ccc', display:'inline-block', height:'3rem', padding:'10px', textAlign:'center', borderRadius:'10px', marginTop:'140px'}}>Sin Stock</span> 
+                            : <Counter detail={detail} onAdd={onAdd} /> }
                         </div>
                         {purchase ? confirmPurchase() : <></>}
                     </div>

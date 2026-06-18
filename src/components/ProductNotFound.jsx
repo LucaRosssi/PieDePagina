@@ -4,8 +4,8 @@ import { Player } from '@lottiefiles/react-lottie-player'
 
 const ProductNotFound = () => {
   return (
-    <div>
-        <h2>No se ha encontrado el producto</h2>
+    <div style={{display:'flex', margin:'40px', flexDirection:'column'}}>
+        <h2 style={{textAlign:'center'}}>No se ha encontrado el producto</h2>
         <Player
                 autoplay
                 loop

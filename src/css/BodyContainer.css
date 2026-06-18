@@ -14,7 +14,7 @@
 .title-container {
     margin-bottom: 2em;
     text-align: center;
-    background-image: url("./book-cover.jpg");
+    background-image: url("/book-cover.jpg");
     background-size: cover;
     background-position: center;
     width: 100%;

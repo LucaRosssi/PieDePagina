@@ -8,6 +8,7 @@ import { CartContainer } from './components/CartContainer'
 import CheckoutRHF from './components/CheckoutRHF'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import PageNotFound from './components/PageNotFound'
+import ProductNotFound from './components/ProductNotFound'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/checkout' element={<CheckoutRHF/>}/>
 
         <Route path='*' element={<PageNotFound/>}/>
+        <Route path='404-product' element={<ProductNotFound/>}/>
       </Routes>
     </CartProvider>
     </BrowserRouter>
